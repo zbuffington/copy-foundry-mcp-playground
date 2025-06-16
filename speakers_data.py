@@ -4,6 +4,7 @@ speakers = [
         "name": "Dr. Eric Horvitz",
         "title": "Chief Scientific Officer",
         "expertise": ["Artificial Intelligence", "Machine Learning", "AI Ethics", "Healthcare AI"],
+        "research_topic": ["Generative AI", "Large Language Models"],
         "bio": "Leading Microsoft's scientific directions and advancing AI innovation with a focus on human-AI collaboration and responsible AI development.",
         "publications": ["AI, People, and Society", "Machine Learning in Healthcare"],
         "group": "Microsoft Research Leadership"
@@ -11,8 +12,9 @@ speakers = [
     {
         "id": 2,
         "name": "Dr. Peter Lee",
-        "title": "Corporate Vice President (CVP), Microsoft Research",
+        "title": "President, Microsoft Research",
         "expertise": ["Research Strategy", "Healthcare Technology", "Quantum Computing"],
+        "research_topic": ["Emerging Technologies", "Data"],
         "bio": "Leading Microsoft Research's global operations and strategic research initiatives in emerging technologies.",
         "publications": ["Future of Computing", "Healthcare Innovation through Technology"],
         "group": "Microsoft Research Leadership"
@@ -22,6 +24,7 @@ speakers = [
         "name": "Dr. Sriram Rajamani",
         "title": "Corporate Vice President (CVP) and Managing Director",
         "expertise": ["Programming Languages", "Software Verification", "Formal Methods"],
+        "research_topic": ["Analytics", "Data"],
         "bio": "Leading Microsoft Research India and driving innovation in programming languages and software reliability.",
         "publications": ["Software Verification Techniques", "Programming Language Design"],
         "group": "Microsoft Research India"
@@ -31,6 +34,7 @@ speakers = [
         "name": "Dr. Christopher Bishop",
         "title": "Laboratory Director and Microsoft Technical Fellow",
         "expertise": ["Machine Learning", "Pattern Recognition", "AI Systems"],
+        "research_topic": ["Large Language Models", "Generative AI"],
         "bio": "Leading Microsoft Research Cambridge and advancing the field of machine learning and AI.",
         "publications": ["Pattern Recognition and Machine Learning", "Neural Networks for Pattern Recognition"],
         "group": "Microsoft Research Cambridge"
@@ -40,6 +44,7 @@ speakers = [
         "name": "Dr. Ashley Llorens",
         "title": "Corporate Vice President (CVP) and Managing Director",
         "expertise": ["Artificial Intelligence", "Autonomous Systems", "Research Strategy"],
+        "research_topic": ["Emerging Technologies", "Energy Sector"],
         "bio": "Leading Microsoft Research Lab in Redmond, focusing on advancing AI innovation and autonomous systems research.",
         "publications": ["AI Systems Design", "Future of Autonomous Technologies"],
         "group": "Microsoft Research Redmond"
@@ -49,6 +54,7 @@ speakers = [
         "name": "Dr. Doug Burger",
         "title": "Technical Fellow and Corporate Vice President (CVP)",
         "expertise": ["Computer Architecture", "Cloud Computing", "Quantum Computing"],
+        "research_topic": ["Energy Sector", "Emerging Technologies"],
         "bio": "Leading advanced technology development and architectural innovation for Microsoft's cloud and computing platforms.",
         "publications": ["Next-Generation Computing Architectures", "Cloud System Design"],
         "group": "Microsoft Research Leadership"

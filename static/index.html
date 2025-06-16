@@ -12,16 +12,40 @@
             padding: 20px;
             background-color: #f5f5f5;
         }
-        .search-container {
+        .search-container, .story-container {
             text-align: center;
             margin: 2em 0;
         }
-        #searchInput {
+        #searchInput, #storyInput {
             width: 60%;
             padding: 12px;
             font-size: 16px;
             border: 2px solid #0078d4;
             border-radius: 4px;
+        }
+        #storyInput {
+            height: 100px;
+            resize: vertical;
+        }
+        .button {
+            background-color: #0078d4;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .button:hover {
+            background-color: #006cbd;
+        }
+        .generated-keywords {
+            margin: 1em 0;
+            padding: 10px;
+            background-color: white;
+            border-radius: 4px;
+            display: inline-block;
         }
         .speakers-grid {
             display: grid;
@@ -55,14 +79,61 @@
 </head>
 <body>
     <h1>Microsoft Research Speakers Search</h1>
+    <div class="story-container">
+        <h2>Generate Keywords from Your Speaking Request</h2>
+        <textarea id="storyInput" placeholder="Describe your speaking request or event requirements..."></textarea>
+        <br>
+        <button class="button" onclick="generateKeywords()">Generate Keywords</button>
+        <div id="generatedKeywords" class="generated-keywords" style="display: none;"></div>
+    </div>
     <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Search by name, expertise, or research group...">
+        <input type="text" id="searchInput" placeholder="Search by name, expertise, research topic, or research group...">
     </div>
     <div id="speakersGrid" class="speakers-grid"></div>
 
     <script>
         const searchInput = document.getElementById('searchInput');
         const speakersGrid = document.getElementById('speakersGrid');
+        const storyInput = document.getElementById('storyInput');
+        const generatedKeywordsDiv = document.getElementById('generatedKeywords');
+
+        async function generateKeywords() {
+            const story = storyInput.value.trim();
+            if (!story) {
+                alert('Please enter a speaking request description.');
+                return;
+            }
+
+            try {
+                const response = await fetch('/generate-keywords', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ story: story })
+                });
+
+                const data = await response.json();
+                
+                if (data.keywords && data.keywords.length > 0) {
+                    generatedKeywordsDiv.innerHTML = `
+                        <p><strong>Relevant Keywords:</strong></p>
+                        ${data.keywords.map(keyword => `<span class="expertise-tag">${keyword}</span>`).join(' ')}
+                    `;
+                    generatedKeywordsDiv.style.display = 'block';
+                    
+                    // Automatically search using the first keyword
+                    searchInput.value = data.keywords[0];
+                    searchSpeakers(data.keywords[0]);
+                } else {
+                    generatedKeywordsDiv.innerHTML = '<p>No relevant keywords found.</p>';
+                    generatedKeywordsDiv.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error generating keywords:', error);
+                alert('Error generating keywords. Please try again.');
+            }
+        }
 
         async function searchSpeakers(query = '') {
             try {
@@ -83,6 +154,10 @@
                     <p><strong>Expertise:</strong></p>
                     <div>
                         ${speaker.expertise.map(exp => `<span class="expertise-tag">${exp}</span>`).join('')}
+                    </div>
+                    <p><strong>Research Topics:</strong></p>
+                    <div>
+                        ${speaker.research_topic.map(topic => `<span class="expertise-tag">${topic}</span>`).join('')}
                     </div>
                     <p><strong>Bio:</strong> ${speaker.bio}</p>
                 </div>
